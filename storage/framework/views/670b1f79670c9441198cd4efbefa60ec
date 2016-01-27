@@ -1,0 +1,13 @@
+<?php $__env->startSection('content'); ?>
+<h1>Student List</h1>
+<div class="form-group">
+    <a href="/students/create" class="btn btn-success">New <i class="glyphicon glyphicon-plus"></i></a>
+
+</div>
+
+<div class="table-responsive table-container">
+    <?php echo $__env->make('partials.student-table', ['students' => $students], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+</div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

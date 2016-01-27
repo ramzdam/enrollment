@@ -1,0 +1,88 @@
+<table class="table">
+    <thead>
+        <?php if(!isset($reports)): ?>
+        <th>Actions</th>
+        <?php endif; ?>
+        <?php if(!isset($reports) or (isset($reports) and in_array('student_number', $search_keys))): ?><th>ID Number</th><?php endif; ?>
+        <?php if(!isset($reports) or (isset($reports) and in_array('fname', $search_keys))): ?><th>First Name</th><?php endif; ?>
+        <?php if(!isset($reports) or (isset($reports) and in_array('lname', $search_keys))): ?><th>Last Name</th><?php endif; ?>
+        <?php if(!isset($reports) or (isset($reports) and in_array('address', $search_keys))): ?><th>Address</th><?php endif; ?>
+        <?php if(!isset($reports) or (isset($reports) and in_array('zip', $search_keys))): ?><th>Zip</th><?php endif; ?>
+        <?php if(!isset($reports) or (isset($reports) and in_array('city', $search_keys))): ?><th>City</th><?php endif; ?>
+        <?php if(!isset($reports) or (isset($reports) and in_array('state', $search_keys))): ?><th>State</th><?php endif; ?>
+        <?php if(!isset($reports) or (isset($reports) and in_array('phone', $search_keys))): ?><th>Phone number</th><?php endif; ?>
+        <?php if(!isset($reports) or (isset($reports) and in_array('mobile', $search_keys))): ?><th>Mobile number</th><?php endif; ?>
+        <?php if(!isset($reports) or (isset($reports) and in_array('email', $search_keys))): ?><th>Email</th><?php endif; ?>
+        <?php if(!isset($reports) or (isset($reports) and in_array('year', $search_keys))): ?><th>Year level</th><?php endif; ?>
+        <?php if(!isset($reports) or (isset($reports) and in_array('section_id', $search_keys))): ?><th>Section</th><?php endif; ?>
+        <?php if(!isset($reports) or (isset($reports) and in_array('dob', $search_keys))): ?><th>Date of Birth</th><?php endif; ?>
+    </thead>
+    <tbody>
+    <?php foreach($students as $student): ?>
+    <tr>
+        <?php if(!isset($reports)): ?>
+        <td>
+            <div class="form-group row">
+                <div class="col-sm-6"><a href="/students/delete/<?php echo e(Crypt::encrypt($student->id)); ?>" class="delete btn btn-danger" style="float:left;"> <i class="glyphicon glyphicon-trash"></i> </a></div>
+                <div class="col-sm-6"><a href="/students/<?php echo e(Crypt::encrypt($student->id)); ?>/edit" class="btn btn-info" style="float:left;"> <i class="glyphicon glyphicon-pencil"></i> </a></div>
+
+            </div>
+        </td>
+        <?php endif; ?>
+        <?php if(!isset($reports) or (isset($reports) and in_array('student_number', $search_keys))): ?><td><?php echo e($student->student_number); ?></td><?php endif; ?>
+        <?php if(!isset($reports) or (isset($reports) and in_array('fname', $search_keys))): ?><td><?php echo e($student->fname); ?></td><?php endif; ?>
+        <?php if(!isset($reports) or (isset($reports) and in_array('lname', $search_keys))): ?><td><?php echo e($student->lname); ?></td><?php endif; ?>
+        <?php if(!isset($reports) or (isset($reports) and in_array('address', $search_keys))): ?><td><?php echo e($student->address); ?></td><?php endif; ?>
+        <?php if(!isset($reports) or (isset($reports) and in_array('zip', $search_keys))): ?><td><?php echo e($student->zip); ?></td><?php endif; ?>
+        <?php if(!isset($reports) or (isset($reports) and in_array('city', $search_keys))): ?><td><?php echo e($student->city); ?></td><?php endif; ?>
+        <?php if(!isset($reports) or (isset($reports) and in_array('state', $search_keys))): ?><td><?php echo e($student->state); ?></td><?php endif; ?>
+        <?php if(!isset($reports) or (isset($reports) and in_array('phone', $search_keys))): ?><td><?php echo e($student->phone); ?></td><?php endif; ?>
+        <?php if(!isset($reports) or (isset($reports) and in_array('mobile', $search_keys))): ?><td><?php echo e($student->mobile); ?></td><?php endif; ?>
+        <?php if(!isset($reports) or (isset($reports) and in_array('email', $search_keys))): ?><td><?php echo e($student->email); ?></td><?php endif; ?>
+        <?php if(!isset($reports) or (isset($reports) and in_array('year', $search_keys))): ?><td><?php echo e($student->year); ?></td><?php endif; ?>
+        <?php if(!isset($reports) or (isset($reports) and in_array('section_id', $search_keys))): ?><td><?php echo e($student->section->name); ?></td><?php endif; ?>
+        <?php if(!isset($reports) or (isset($reports) and in_array('dob', $search_keys))): ?><td><?php echo e($student->dob); ?></td><?php endif; ?>
+
+    </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>
+<script>
+    $(document).ready(function() {
+        $('.table').dataTable();
+
+        $(".delete").on('click', function() {
+
+            var confirmation = confirm("Are you sure you want to delete?");
+            if (confirmation == true) {
+                $.ajax({
+                    url: $(this).attr('href'),
+                    type: 'GET',
+                    dataType: 'json',
+                    beforeSend: function() {
+                    },
+                    success: function(response) {
+                        var content = response.content || ''
+                        $(".table-container").html(content);
+                        showMessage(response.message, response.success);
+
+                    }
+                }).done(function() {
+                }).error(function(error_reply) {
+                    var errors = error_reply.responseJSON;
+
+                    var ul = '<ul>';
+
+                    $.each(errors, function(index, item) {
+                        ul += '<li>' + item + '</li>';
+                    });
+
+                    ul += '</ul>';
+
+                    showMessage(ul);
+                });
+            }
+            return false;
+        });
+    });
+</script>

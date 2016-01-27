@@ -1,0 +1,11 @@
+{!! HTML::script('js/jquery-1.11.3.min.js') !!}
+{!! HTML::script('js/jquery-ui.min.js') !!}
+{!! HTML::style('css/bootstrap.min.css') !!}
+{!! HTML::style('css/bootstrap-theme.min.css') !!}
+{!! HTML::style('css/jquery-ui.min.css') !!}
+{!! HTML::style('css/bootstrap-datetimepicker.min.css') !!}
+{!! HTML::style('css/dataTables.bootstrap.min.css') !!}
+{!! HTML::style('css/dataTables.jqueryui.min.css') !!}
+{!! HTML::style('css/jquery.dataTables.min.css') !!}
+{!! HTML::style('css/normalize.css') !!}
+{!! HTML::style('css/select2.css') !!}
