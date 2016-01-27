@@ -26,7 +26,7 @@ class CreateStudentsTable extends Migration
             $table->string('email');
             $table->integer('year')->unsigned()->index();
             $table->integer('section_id')->unsigned()->index();
-            $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');
+            $table->foreign('section_id')->references('id')->on('sections');
             $table->timestamps();
         });
     }

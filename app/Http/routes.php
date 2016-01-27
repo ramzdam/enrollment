@@ -15,6 +15,8 @@ Route::get('/', 'StudentController@index');
 
 Route::resource('students', 'StudentController');
 Route::resource('reports', 'ReportController');
+Route::resource('sections', 'SectionController');
 Route::get('students/delete/{id}', 'StudentController@destroy');
+Route::get('sections/delete/{id}', 'SectionController@destroy');
 Route::post('reports/search', 'ReportController@search');
 Route::post('reports/export', 'ReportController@export');

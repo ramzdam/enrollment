@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AddStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
+use App\Section;
 use App\Student;
 use Illuminate\Http\Request;
 
@@ -32,7 +33,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('students.create');
+        $sections = Section::all();
+        return view('students.create', compact('sections'));
     }
 
     /**
@@ -95,8 +97,9 @@ class StudentController extends Controller
     public function edit($id)
     {
         $student = Student::find(Crypt::decrypt($id));
+        $sections = Section::all();
 
-        return view('students.create', compact('student'));
+        return view('students.create', compact('student', 'sections'));
     }
 
     /**
@@ -139,7 +142,7 @@ class StudentController extends Controller
             return response()->json(['success' => false, 'message' => 'Failed to delete record!']);
         }
 
-        $students = Student::all();
+        $students = Student::orderBy('name')->get();
         return response()->json(['success' => true, 'message' => 'Delete record successful!', 'content' => view('partials.student-table', compact('students'))->render()]);
     }
 }

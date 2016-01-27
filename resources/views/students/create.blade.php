@@ -77,7 +77,7 @@
     </div>
     <div class="col-sm-3">
         <label for="section_id" class="control-label text-left" style="text-align: left;"><i class="glyphicon glyphicon-calendar"></i> Section</label>
-        {!! Form::text('section_id', null, ['id' => 'section_id', 'class' => 'form-control ', 'placeholder' => 'Enter section']) !!}
+        {!! Form::select('section_id', App\Section::lists('name','id'), null,['class' => 'form-control']) !!}
 
     </div>
 </div>

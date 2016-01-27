@@ -28,7 +28,7 @@
                 <li><a href="/students" class="btn_subpage navigation" data-url="/students"><i class="glyphicon glyphicon-level-up"> </i> Students</a></li>
                 <li><a href="/sections" class="btn_subpage navigation" data-url="/sections"><i class="glyphicon glyphicon-level-up"> </i> Sections</a></li>
                 <li><a href="/reports" class="btn_subpage navigation" data-url="/reports"><i class="glyphicon glyphicon-level-up"> </i> Reports</a></li>
-                <li><a href="/resources" class="btn_subpage navigation" data-url="/resources"><i class="glyphicon glyphicon-level-up"> </i> Resources</a></li>
+
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
